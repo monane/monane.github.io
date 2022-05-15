@@ -1,1 +1,17 @@
+body {
+    background-color: black;
+}
 
+.inline-videos {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.video-container {
+    margin: 100px 50px;
+}
+
+.horizontal-videos .inline-videos video {
+    margin: 50px;
+}
