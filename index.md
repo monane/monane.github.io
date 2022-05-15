@@ -1,6 +1,1 @@
-<iframe id="inlineFrameExample"
-    title="Inline Frame Example"
-    width="300"
-    height="200"
-    src="videos.html">
-</iframe>
+<iframe src="videos.html"></iframe>
