@@ -1,5 +1,5 @@
 body {
-    background-color: green;
+    background-color: black;
 }
 
 .inline-videos {
@@ -15,4 +15,12 @@ body {
 .horizontal-videos .inline-videos video {
     width: 90%;
     margin: 50px;
+}
+
+.vertical-videos .inline-videos video {
+    width: 1300px;
+}
+
+.vertical-videos .inline-videos .pursuit-concept video {
+    width: 1020px;
 }
