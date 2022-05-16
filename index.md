@@ -1,8 +1,3 @@
-<head>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" href="styles.css">
-    <title>Kirill's projects</title>
-</head>
 <body>
     <div class="vertical-videos">
         <div class="inline-videos">
@@ -42,5 +37,4 @@
             </video>
         </div>
     </div>
-
 </body>
