@@ -9,7 +9,7 @@ body {
 }
 
 .video-container {
-    margin: 100px 50px;
+    margin: 25px 20px;
 }
 
 .horizontal-videos .inline-videos video {
@@ -18,9 +18,9 @@ body {
 }
 
 .vertical-videos .inline-videos video {
-    width: 400px;
+    width: 390px;
 }
 
 .vertical-videos .inline-videos .pursuit-concept video {
-    width: 400px;
+    width: 310px;
 }
