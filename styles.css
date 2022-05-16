@@ -24,3 +24,8 @@ body {
 .vertical-videos .inline-videos .pursuit-concept video {
     width: 310px;
 }
+
+
+video {
+    background-color: grey;
+}
