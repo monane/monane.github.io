@@ -34,16 +34,13 @@
 
     <div class="horizontal-videos">
         <div class="inline-videos">
-            <video class="gravican-video" width="90%" muted autoplay loop>
+            <video muted autoplay loop>
                 <source src="videos/gravican.mp4" type="video/mp4">
             </video>
-
-            <video width="90%" muted autoplay loop>
+            <video muted autoplay loop>
                 <source src="videos/sniper.webm" type="video/webm">
             </video>
         </div>
-
-        
     </div>
 
 </body>

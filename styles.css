@@ -13,5 +13,6 @@ body {
 }
 
 .horizontal-videos .inline-videos video {
+    width: 90%;
     margin: 50px;
 }
