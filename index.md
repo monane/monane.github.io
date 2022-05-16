@@ -1,4 +1,4 @@
-<body>
+
     <div class="vertical-videos">
         <div class="inline-videos">
             <div class="video-container">
@@ -37,4 +37,3 @@
             </video>
         </div>
     </div>
-</body>
