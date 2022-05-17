@@ -4,9 +4,6 @@ body {
 
 video {
     background-color: grey;
-}
-
-.video-container {
     margin: 25px 20px;
 }
 
@@ -20,18 +17,19 @@ video {
     width: 390px;
 }
 
-.vertical-videos .pursuit-concept video {
+#pursuit-concept {
     width: 310px;
 }
 
 .horizontal-videos {
     display: flex;
     flex-direction: column;
+    flex-wrap: wrap;
     justify-content: center;
     align-items: center;
 }
 
 .horizontal-videos video {
-    width: 1610px;
-    margin: 25px;
+    max-width: 1650px;
+    width: 87%;
 }
