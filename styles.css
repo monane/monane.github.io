@@ -2,30 +2,36 @@ body {
     background-color: black;
 }
 
-.inline-videos {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
+video {
+    background-color: grey;
 }
 
 .video-container {
     margin: 25px 20px;
 }
 
-.horizontal-videos .inline-videos video {
-    width: 90%;
-    margin: 50px;
+.vertical-videos {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
 }
 
-.vertical-videos .inline-videos video {
+.vertical-videos video {
     width: 390px;
 }
 
-.vertical-videos .inline-videos .pursuit-concept video {
+.vertical-videos .pursuit-concept video {
     width: 310px;
 }
 
+.horizontal-videos {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
 
-video {
-    background-color: grey;
+.horizontal-videos video {
+    width: 1610px;
+    margin: 25px;
 }
