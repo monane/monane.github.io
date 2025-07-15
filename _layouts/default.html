@@ -88,22 +88,42 @@
   </div>
 
   <script>
-    document.querySelectorAll("video").forEach((video) => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            video.play();
-          } else {
-            video.pause();
-          }
-        });
-      },
-      { threshold: 0.25 }
-    );
+  const videos = document.querySelectorAll("video.autoplay-on-visible");
+  const playDelays = new Map(); // To track timeouts per video
+
+  const playVideoSafely = (video) => {
+    if (video.readyState >= 2) {
+      video.play().catch((err) => {
+        console.warn("Video play failed:", err);
+      });
+    } else {
+      setTimeout(() => playVideoSafely(video), 100);
+    }
+  };
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        const video = entry.target;
+        clearTimeout(playDelays.get(video));
+
+        if (entry.isIntersecting) {
+          const timeout = setTimeout(() => {
+            playVideoSafely(video);
+          }, 100);
+          playDelays.set(video, timeout);
+        } else {
+          video.pause();
+        }
+      });
+    },
+    { threshold: 0.25 }
+  );
+
+  videos.forEach((video) => {
     observer.observe(video);
-});
-  </script>
+  });
+</script>
 </body>
 
 </html>
