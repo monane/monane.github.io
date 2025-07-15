@@ -93,12 +93,10 @@
 
     const loadAndPlay = () => {
       if (!source.src) {
-        // Set real src to start loading
         source.src = source.dataset.src;
         video.load();
       }
 
-      // Play when ready
       const tryPlay = () => {
         if (video.readyState >= 2) {
           video.play().catch((err) => {
