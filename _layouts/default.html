@@ -12,98 +12,122 @@
   
   <div class="vertical-videos">
     <div class="video-container">
-      <video muted playsinline loop>
-        <source src="videos/ar-theatre.mp4" type="video/mp4">
+      <video muted playsinline loop preload="none">
+        <source data-src="videos/ar-theatre.mp4" type="video/mp4">
       </video>
     </div>
 
     <div class="video-container">
-      <video muted playsinline loop>
-        <source src="videos/8thwall-webar.mp4" type="video/mp4">
+      <video muted playsinline loop preload="none">
+        <source data-src="videos/8thwall-webar.mp4" type="video/mp4">
       </video>
     </div>
 
     <div class="video-container">
-      <video muted playsinline loop>
-        <source src="videos/zemlekop-ar.mp4" type="video/mp4">
+      <video muted playsinline loop preload="none">
+        <source data-src="videos/zemlekop-ar.mp4" type="video/mp4">
       </video>
     </div>
     
     <div class="video-container">
-      <video id="ar-experiments" muted playsinline loop>
-        <source src="videos/ar-experiments.webm" type="video/webm">
+      <video id="ar-experiments" muted playsinline loop preload="none">
+        <source data-src="videos/ar-experiments.webm" type="video/webm">
       </video>
     </div>
   </div>
 
   <div class="horizontal-videos">
-    <video muted playsinline loop>
-      <source src="https://user74522.clients-cdnnow.ru/static/manual-uploads/review-videos/xreal-demo.mp4" type="video/mp4">
+    <video muted playsinline loop preload="none">
+      <source data-src="https://user74522.clients-cdnnow.ru/static/manual-uploads/review-videos/xreal-demo.mp4" type="video/mp4">
     </video>
-    <video muted playsinline loop>
-      <source src="videos/editor-demo.mp4" type="video/mp4">
+    <video muted playsinline loop preload="none">
+      <source data-src="videos/editor-demo.mp4" type="video/mp4">
     </video>
-    <video muted playsinline loop>
-      <source src="https://user74522.clients-cdnnow.ru/static/manual-uploads/review-videos/object-tracking.mp4" type="video/mp4">
+    <video muted playsinline loop preload="none">
+      <source data-src="https://user74522.clients-cdnnow.ru/static/manual-uploads/review-videos/object-tracking.mp4" type="video/mp4">
     </video>
-    <video muted playsinline loop>
-      <source src="https://user74522.clients-cdnnow.ru/static/manual-uploads/review-videos/orbslam2-demo.mp4" type="video/mp4">
+    <video muted playsinline loop preload="none">
+      <source data-src="https://user74522.clients-cdnnow.ru/static/manual-uploads/review-videos/orbslam2-demo.mp4" type="video/mp4">
     </video>
     
-    <video muted playsinline loop>
-      <source src="videos/bibalina-ar-learning.webm" type="video/webm">
+    <video muted playsinline loop preload="none">
+      <source data-src="videos/bibalina-ar-learning.webm" type="video/webm">
     </video>
-    <video muted playsinline loop>
-      <source src="videos/gravican.mp4" type="video/mp4">
+    <video muted playsinline loop preload="none">
+      <source data-src="videos/gravican.mp4" type="video/mp4">
     </video>
-    <video muted playsinline loop>
-      <source src="videos/sniper.webm" type="video/webm">
+    <video muted playsinline loop preload="none">
+      <source data-src="videos/sniper.webm" type="video/webm">
     </video>
   </div>
 
   <div class="vertical-videos">
     <div class="video-container">
-      <video muted playsinline loop>
-        <source src="videos/arcade-idle.webm" type="video/webm">
+      <video muted playsinline loop preload="none">
+        <source data-src="videos/arcade-idle.webm" type="video/webm">
       </video>
     </div>
 
     <div class="video-container">
-      <video muted playsinline loop>
-        <source src="videos/paint-ball.webm" type="video/webm">
+      <video muted playsinline loop preload="none">
+        <source data-src="videos/paint-ball.webm" type="video/webm">
       </video>
     </div>
 
     <div class="video-container">
-      <video muted playsinline loop>
-        <source src="videos/runner.webm" type="video/webm">
+      <video muted playsinline loop preload="none">
+        <source data-src="videos/runner.webm" type="video/webm">
       </video>
     </div>
 
     <div class="video-container">
-      <video id="pursuit-concept" muted playsinline loop>
-        <source src="videos/pursuit-concept.webm" type="video/webm">
+      <video id="pursuit-concept" muted playsinline loop preload="none">
+        <source data-src="videos/pursuit-concept.webm" type="video/webm">
       </video>
     </div>
   </div>
 
   <script>
-    document.querySelectorAll("video").forEach((video) => {
-      const observer = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-              video.play();
-            } else {
-              video.pause();
-            }
+  document.querySelectorAll("video").forEach((video) => {
+    const source = video.querySelector("source");
+
+    const loadAndPlay = () => {
+      if (!source.src) {
+        // Set real src to start loading
+        source.src = source.dataset.src;
+        video.load();
+      }
+
+      // Play when ready
+      const tryPlay = () => {
+        if (video.readyState >= 2) {
+          video.play().catch((err) => {
+            console.warn("Play failed:", err);
           });
-        },
-        { threshold: 0.25 }
-      );
-      observer.observe(video);
-    });
-  </script>
+        } else {
+          setTimeout(tryPlay, 100);
+        }
+      };
+
+      tryPlay();
+    };
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            loadAndPlay();
+          } else {
+            video.pause();
+          }
+        });
+      },
+      { threshold: 0.25 }
+    );
+
+    observer.observe(video);
+  });
+</script>
 </body>
 
 </html>
