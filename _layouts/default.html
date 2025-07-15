@@ -12,113 +12,113 @@
   
   <div class="vertical-videos">
     <div class="video-container">
-      <video muted controls playsinline loop preload="metadata">
+      <video muted controls playsinline loop>
         <source src="videos/ar-theatre.mp4" type="video/mp4">
       </video>
     </div>
 
     <div class="video-container">
-      <video muted controls playsinline loop preload="metadata">
+      <video muted controls playsinline loop>
         <source src="videos/8thwall-webar.mp4" type="video/mp4">
       </video>
     </div>
 
     <div class="video-container">
-      <video muted controls playsinline loop preload="metadata">
+      <video muted controls playsinline loop>
         <source src="videos/zemlekop-ar.mp4" type="video/mp4">
       </video>
     </div>
     
     <div class="video-container">
-      <video id="ar-experiments" muted controls playsinline loop preload="metadata">
+      <video id="ar-experiments" muted controls playsinline loop>
         <source src="videos/ar-experiments.webm" type="video/webm">
       </video>
     </div>
   </div>
 
   <div class="horizontal-videos">
-    <video muted playsinline loop preload="metadata">
+    <video muted playsinline loop>
       <source src="https://user74522.clients-cdnnow.ru/static/manual-uploads/review-videos/xreal-demo.mp4" type="video/mp4">
     </video>
-    <video muted playsinline loop preload="metadata">
+    <video muted playsinline loop>
       <source src="videos/editor-demo.mp4" type="video/mp4">
     </video>
-    <video muted playsinline loop preload="metadata">
+    <video muted playsinline loop>
       <source src="https://user74522.clients-cdnnow.ru/static/manual-uploads/review-videos/object-tracking.mp4" type="video/mp4">
     </video>
-    <video muted playsinline loop preload="metadata">
+    <video muted playsinline loop>
       <source src="https://user74522.clients-cdnnow.ru/static/manual-uploads/review-videos/orbslam2-demo.mp4" type="video/mp4">
     </video>
     
-    <video muted playsinline loop preload="metadata">
+    <video muted playsinline loop>
       <source src="videos/bibalina-ar-learning.webm" type="video/webm">
     </video>
-    <video muted playsinline loop preload="metadata">
+    <video muted playsinline loop>
       <source src="videos/gravican.mp4" type="video/mp4">
     </video>
-    <video muted playsinline loop preload="metadata">
+    <video muted playsinline loop>
       <source src="videos/sniper.webm" type="video/webm">
     </video>
   </div>
 
   <div class="vertical-videos">
     <div class="video-container">
-      <video muted playsinline loop preload="metadata">
+      <video muted playsinline loop>
         <source src="videos/arcade-idle.webm" type="video/webm">
       </video>
     </div>
 
     <div class="video-container">
-      <video muted playsinline loop preload="metadata">
+      <video muted playsinline loop>
         <source src="videos/paint-ball.webm" type="video/webm">
       </video>
     </div>
 
     <div class="video-container">
-      <video muted playsinline loop preload="metadata">
+      <video muted playsinline loop>
         <source src="videos/runner.webm" type="video/webm">
       </video>
     </div>
 
     <div class="video-container">
-      <video id="pursuit-concept" muted playsinline loop preload="metadata">
+      <video id="pursuit-concept" muted playsinline loop>
         <source src="videos/pursuit-concept.webm" type="video/webm">
       </video>
     </div>
   </div>
 
   <script>
-    const videos = document.querySelectorAll("video.autoplay-on-visible");
-    const playDelays = new Map();
+  const videos = document.querySelectorAll("video.autoplay-on-visible");
+  const playDelays = new Map(); // To track timeouts per video
 
-    const playVideoSafely = (video) => {
-      if (video.readyState >= 2) {
-        video.play().catch((err) => {
-          console.warn("Video play failed:", err);
-        });
-      } else {
-        setTimeout(() => playVideoSafely(video), 100);
-      }
-    };
+  const playVideoSafely = (video) => {
+    if (video.readyState >= 2) {
+      video.play().catch((err) => {
+        console.warn("Video play failed:", err);
+      });
+    } else {
+      setTimeout(() => playVideoSafely(video), 100);
+    }
+  };
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          const video = entry.target;
-          clearTimeout(playDelays.get(video));
-    
-          if (entry.isIntersecting) {
-            const timeout = setTimeout(() => {
-              playVideoSafely(video);
-            }, 100);
-            playDelays.set(video, timeout);
-          } else {
-            video.pause();
-          }
-        });
-      },
-      { threshold: 0.25 }
-    );
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        const video = entry.target;
+        clearTimeout(playDelays.get(video));
+
+        if (entry.isIntersecting) {
+          const timeout = setTimeout(() => {
+            playVideoSafely(video);
+          }, 100);
+          playDelays.set(video, timeout);
+        } else {
+          video.pause();
+        }
+      });
+    },
+    { threshold: 0.25 }
+  );
 
   videos.forEach((video) => {
     observer.observe(video);
